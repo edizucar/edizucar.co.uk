@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="description" content="they know what they are doing. And yet they are still doing it.">
+        <meta name="author" content="Ediz Ucar">
+        <title>Shut&lambda;own &#x233F;&#x233F;&#x233F; Ediz Ucar</title>
+        <link rel="icon" type="image/x-icon" href="icon.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1 style="font-size: 32px;">Shut&lambda;own</h1>
+        <p>Ediz Ucar</p>
+        <hr />
+        <div id="ascii-art-container" style="text-align: center;"></div>
+        <pre onclick="createSymbols()" style=" cursor: pointer; font-family: monospace; text-align: left; display: inline-block; background-color: rgb(10, 0, 0); padding: 5px 20px; border: 2px solid rgb(212, 196, 196); border-radius: 10px; box-shadow: 0 0 5px rgb(212, 196, 196); color: rgb(212, 196, 196);" class="">                 ______
+                /     /\
+               /     /##\
+              /     /####\
+             /     /######\
+            /     /########\
+           /     /##########\
+          /     /#####/\#####\
+         /     /#####/++\#####\
+        /     /#####/++++\#####\
+       /     /#####/\+++++\#####\
+      /     /#####/  \+++++\#####\
+     /     /#####/    \+++++\#####\
+    /     /#####/      \+++++\#####\
+   /     /#####/        \+++++\#####\
+  /     /#####/__________\+++++\#####\
+ /                        \+++++\#####\
+/__________________________\+++++\####/
+\+++++++++++++++++++++++++++++++++\##/
+ \+++++++++++++++++++++++++++++++++\/
+  ``````````````````````````````````
+</pre>
+        <p id="links">
+            <a href="https://books.edizucar.co.uk">&#x27e8;&#x03c6;&#x007c; library &#x007c;&#x03c8;&#x27e9;</a> 
+            | 
+            <a href="https://plex.edizucar.co.uk">&#x0393; &#x22A2; plex :&#x03C4;</a>
+            |
+            <a href="https://deluge.edizucar.co.uk">&#x27E6; deluge &#x27E7;</a>
+            |
+            <a href="cv.pdf">&#x27F9; cv &#x2234; &#x220E;</a>
+            |
+            <a href="about">&#x222B;  about &#x1D451;&#x1D465;</a>
+        </p>
+        <hr />
+        <small style="text-align: left; display: block; margin-left: 10px;">&copy; 2024 by Ediz Ucar. All Rights Reserved.</small>
+        <!-- Keep walking, Slim.-->
+    </body>
+    <style>
+        p#links {
+            color: rgba(255, 255, 255, 0.748);
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        p#links > a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            margin: 0 10px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        p#links > a:hover {
+            color: #4caf50; /* Change to a glowing green on hover */
+            transform: scale(1.1); /* Slight zoom effect */
+        }
+
+        a {
+            position: relative;
+            text-decoration: none;
+        }
+
+        a::before {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #4caf50;
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        a:hover::before {
+            transform: scaleX(1);
+        }
+
+
+        pre{
+            transition: text-shadow 5s;
+            text-shadow:0;
+        }
+        pre:hover{
+            text-shadow: 0 0 0px rgb(255, 0, 0);
+        }
+
+        pre:hover {
+            /* Start the shake animation and make the animation last for 0.5 seconds */
+            animation: shake 0.5s;
+
+            /* When the animation is finished, start again */
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        } 
+                
+    </style>
+    <script src="symbols.js"></script>
+    <script>
+        animateSymbols();
+    </script>
+
+</html>

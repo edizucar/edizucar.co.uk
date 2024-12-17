@@ -1,0 +1,1 @@
+goaccess doesn't need anything here to begin. It will populate this folder with `index.html` which is then served by NGINX.

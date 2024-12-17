@@ -1,0 +1,27 @@
+# Ignore certificate and key files
+*.crt
+*.key
+*.pem
+*.cert
+*.der
+*.csr
+*.cer
+
+# Ignore common temporary cert-related files
+*.p12
+*.pfx
+
+
+deluge/config/*
+deluge/downloads/*
+
+calibre/config/*
+calibre/books/*
+
+calibre/config/*
+calibre/books/*
+
+goaccess/index.html
+
+nginx/logs/*
+

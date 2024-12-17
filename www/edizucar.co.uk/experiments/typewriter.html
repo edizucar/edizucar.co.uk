@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typewriter Animation</title>
+  <style>
+    /* Base styles */
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden; /* Prevent scrolling during animation */
+    }
+
+    /* Typewriter container */
+    #typewriter {
+        font-size: 4rem;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 4px solid white; /* The blinking cursor */
+        width: 0; /* Start with no visible text */
+        animation: typing 3s steps(20, end), blink 1.5s step-end infinite;
+    }
+
+
+    /* Fade-in container */
+    #content {
+      opacity: 0; /* Initially hidden */
+      display: none;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out 4s forwards;
+    }
+
+    /* Keyframes for typing effect */
+    @keyframes typing {
+    from {
+        width: 0; /* Start with no visible text */
+    }
+    to {
+        width: 18ch; /* Adjust to match the length of your name */
+    }
+    }
+
+    /* Keyframes for blinking effect */
+    @keyframes blink {
+    from {
+        border-color: transparent; /* Cursor disappears */
+    }
+    to {
+        border-color: white; /* Cursor is visible */
+    }
+    }
+
+    /* Keyframes for fade-out effect */
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+
+    /* Keyframes for fade-in effect */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Typewriter effect -->
+  <div id="typewriter">Your Name Here</div>
+
+  <!-- Content that fades in after animation -->
+  <div id="content">
+    <h1>Welcome to My Website</h1>
+    <p>Explore and enjoy the content below.</p>
+  </div>
+
+  <script>
+    // Select the typewriter and content elements
+    const typewriter = document.getElementById('typewriter');
+    const content = document.getElementById('content');
+
+    // Start the animation sequence
+    setTimeout(() => {
+      // Add fade-out animation to the typewriter
+      typewriter.style.animation = 'fadeOut 1s forwards';
+    }, 3000); // After typing ends
+
+    setTimeout(() => {
+      // Move the typewriter text upwards smoothly
+      typewriter.style.transform = 'translateY(-100px)';
+      typewriter.style.transition = 'transform 1s ease';
+
+      // Display and fade in the content
+      content.style.display = 'block'; // Make content visible
+    }, 4000); // After fade-out ends
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"   # Redirect HTTP to HTTPS
+      - "443:443" # HTTPS traffic
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d             # Custom configuration files
+      - ./nginx/ssl:/etc/ssl                       # SSL certificates
+      - ./www:/var/www/html                        # Website root directories
+      - ./nginx/logs:/var/log/nginx                # Log files
+      - ./goaccess:/var/log/goaccess
+    networks:
+      - reverse-proxy
+    environment:
+      - TZ=UTC  # Set timezone
+
+  calibre:
+    image: linuxserver/calibre-web
+    container_name: calibre
+    restart: unless-stopped
+    environment:
+      - PUID=1000  # Adjust as necessary
+      - PGID=1000  # Adjust as necessary
+      - TZ=Europe/London  # Set your timezone
+    volumes:
+      - ./calibre/config:/config  # Replace with your config path
+      - ./calibre/books:/books  # Replace with your books path
+    ports:
+      - "8083:8083"
+    networks:
+      - reverse-proxy
+
+  deluge:
+    image: linuxserver/deluge:latest
+    container_name: deluge
+    restart: unless-stopped
+    ports:
+      - "8112:8112"
+      - 6881:6881
+      - 6881:6881/udp
+      - 58846:58846 #optional
+    networks:
+      - reverse-proxy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+    volumes:
+      - ./deluge/config:/config
+      - ./deluge/downloads:/downloads
+
+
+  goaccess:
+    image: allinurl/goaccess:latest
+    container_name: goaccess
+    restart: unless-stopped
+    ports:
+      - "7890:7890"  # WebSocket server for real-time updates
+    volumes:
+      - ./nginx/logs:/srv/logs:ro  # Mount Nginx logs as read-only
+      - ./goaccess:/srv/report     # Store the GoAccess HTML report
+    command: >
+      /srv/logs/access.log
+      --log-format=COMBINED
+      --real-time-html
+      --output=/srv/report/index.html
+      --ws-url=wss://goaccess.edizucar.co.uk/ws
+    networks:
+      - reverse-proxy
+
+
+networks:
+  reverse-proxy:
+    driver: bridge

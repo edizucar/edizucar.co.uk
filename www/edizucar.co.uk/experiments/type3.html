@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="description" content="------/////------">
+        <title>Shut&lambda;own</title>
+        <link rel="icon" type="image/x-icon" href="icon3.png">
+    </head>
+
+    <body style="margin: 0; padding: 0; overflow: hidden; background: black; font-family: 'Courier New', monospace;">
+
+        <!-- Symbolic Centerpiece -->
+        <div id="symbolic-core" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <h1 id="core-title" style="font-size: 5vw;">ƛ The Dissolving Self ƛ</h1>
+            <p id="core-quote" style="font-size: 2vw;">"Symbols are the scaffolding of thought, but the structure must crumble to evolve."</p>
+        </div>
+
+        <!-- Sidebar for Theme Switching -->
+        <div id="theme-sidebar" style="position: absolute; top: 25%; left: 0; gap:10px; padding:10px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 3px solid white; border-left: none; box-shadow: 0 0 5px white;">
+            <div class="theme-button" data-theme="twilight">&#x27ff;</div>
+            <div class="theme-button" data-theme="neon">&#x222e;</div>
+            <div class="theme-button" data-theme="vaporwave">&#x2211;</div>
+            <div class="theme-button" data-theme="cyberpunk">&#x220B;</div>
+            <div class="theme-button" data-theme="monochrome">&#x2205;</div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="position: absolute; bottom: 0; width: 100%; text-align: center; padding: 10px; font-size: 1.2vw;">
+            <p id="footer-text">All that persists is transformation. <span>© 2024</span></p>
+        </footer>
+
+        <!-- JavaScript for Themes, Animations, and Interaction -->
+        <script>
+            // Define all themes
+            const themes = {
+                twilight: {
+                    background: '#1a1a2e',
+                    text: '#e94560',
+                    highlight: '#0f3460',
+                    subHighlight: '#16213e',
+                    footer: '#1a1a2e',
+                    iconColor: '#1a1aee',
+                },
+                neon: {
+                    background: 'black',
+                    text: 'lime',
+                    highlight: 'cyan',
+                    subHighlight: 'magenta',
+                    footer: 'rgba(0, 0, 0, 0.8)',
+                    iconColor: 'lime',
+                },
+                vaporwave: {
+                    background: '#2b2d42',
+                    text: '#f72585',
+                    highlight: '#ff9e00',
+                    subHighlight: '#7209b7',
+                    footer: '#2b2d42',
+                    iconColor: '#ff9e00',
+                },
+                cyberpunk: {
+                    background: '#0d0d0d',
+                    text: '#f8d210',
+                    highlight: '#ff2e63',
+                    subHighlight: '#08d9d6',
+                    footer: '#0d0d0d',
+                    iconColor: '#ff2e63',
+                },
+                monochrome: {
+                    background: '#121212',
+                    text: '#eeeeee',
+                    highlight: '#ffffff',
+                    subHighlight: '#bbbbbb',
+                    footer: '#121212',
+                    iconColor: '#eeeeee',
+                },
+            };
+
+            // Apply theme
+            function applyTheme(theme) {
+                const currentTheme = themes[theme];
+                document.body.style.background = currentTheme.background;
+                document.getElementById('core-title').style.color = currentTheme.highlight;
+                document.getElementById('core-title').style.textShadow = `0 0 15px ${currentTheme.highlight}`;
+                document.getElementById('core-quote').style.color = currentTheme.subHighlight;
+                document.getElementById('footer-text').style.color = currentTheme.text;
+                document.querySelector('footer').style.background = currentTheme.footer;
+
+                // Highlight the active theme button and apply icon color
+                document.querySelectorAll('.theme-button').forEach(button => {
+                    button.style.color = button.getAttribute('data-theme') in themes ? themes[button.getAttribute('data-theme')].iconColor : 'white';
+                    button.style.textShadow = 'none';
+                });
+                const activeButton = document.querySelector(`.theme-button[data-theme="${theme}"]`);
+                activeButton.style.textShadow = `0 0 15px ${currentTheme.iconColor}`;
+            }
+
+            // Sidebar interaction
+            document.querySelectorAll('.theme-button').forEach(button => {
+                button.style.fontSize = '1.5vw';
+                button.style.margin = '20px';
+                button.style.cursor = 'pointer';
+                button.addEventListener('click', (event) => {
+                    const theme = event.target.getAttribute('data-theme');
+                    applyTheme(theme);
+                });
+            });
+
+            // Apply the default theme on page load
+            document.addEventListener('DOMContentLoaded', () => {
+                applyTheme('twilight');
+            });
+
+
+            const symbols = ['&#x27ff;', '&#x222e;', '&#x2211;', '&#x220B;', '&#x2205;'];
+            const symbolObjects = [];
+
+
+            // Animation with moving symbols
+            class Symbol {
+                constructor(content) {
+                    this.element = document.createElement('div');
+                    this.element.innerHTML = content;
+                    this.element.style.position = 'absolute';
+                    this.element.style.fontSize = `${Math.random() * 3 + 1}vw`;
+                    this.element.style.color = 'rgba(255, 255, 255, 0.7)';
+                    this.element.style.textShadow = '0 0 10px rgba(255, 255, 255, 0.5)';
+                    this.x = Math.random() * window.innerWidth;
+                    this.y = Math.random() * window.innerHeight;
+                    this.speedX = (Math.random() - 0.5) * 5;
+                    this.speedY = (Math.random() - 0.5) * 5;
+                    this.element.style.left = `${this.x}px`;
+                    this.element.style.top = `${this.y}px`;
+                    this.element.style.cursor = "pointer"
+                    document.body.appendChild(this.element);
+
+                    this.element.addEventListener('click',() => this.onClick());
+                }
+
+                updatePosition() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.x < 0 || this.x > window.innerWidth) {
+                        this.speedX *= -1;
+                    }
+                    if (this.y < 0 || this.y > window.innerHeight) {
+                        this.speedY *= -1;
+                    }
+
+                    this.element.style.left = `${this.x}px`;
+                    this.element.style.top = `${this.y}px`;
+                }
+
+                onClick() {
+                    console.log(Math.random());
+                    // create exprosion
+                    for (let i=0; i<10; i++) {
+                        const babySymbol = new BabySymbol(this.element.innerHTML, this.x+this.speedX, this.y+this.speedY, this.speedX, this.speedY);
+                        symbolObjects.push(babySymbol);
+                    }
+                    const newSymbol = new Symbol(symbols[Math.floor(Math.random() * symbols.length)]);
+                    symbolObjects.push(newSymbol);
+                    this.remove();
+                }
+
+                remove() {
+                    this.element.remove();
+                    const index = symbolObjects.indexOf(this);
+                    if (index > -1) {
+                        symbolObjects.splice(index, 1);
+                    }
+                }
+
+            }
+
+            class BabySymbol extends Symbol {
+                constructor(content, parentX, parentY, parentSpeedX, parentSpeedY) {
+                    // Call the parent class constructor
+                    super(content);
+                    this.speedX = (Math.random() - 0.5) * 5 + parentSpeedX*3;
+                    this.speedY =(Math.random() - 0.5) * -5 + parentSpeedY*3;
+                    this.element.style.color = generateNeonColorHSLA();
+
+                    this.accX = 0
+                    this.accY = 0.3
+                    
+                    this.x = parentX;
+                    this.y = parentY;
+                    this.lifetime = 60 + Math.floor(Math.random() * 30); // frames
+
+                    this.element.style.cursor = "default"
+
+                    this.element.style.fontSize = `${this.lifetime}vw`;
+
+                    // Overwrite the click behavior
+                    this.onClick = () => {}
+                }
+
+                updatePosition() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    this.speedX += this.accX
+                    this.speedY += this.accY
+
+                    if (this.x < 0 || this.x > window.innerWidth) {
+                        this.lifetime = -1;
+                    }
+                    if (this.y < 0 || this.y > window.innerHeight) {
+                        this.lifetime = -1;
+                    }
+
+                    this.lifetime--;
+
+                    if (this.lifetime < 0) {
+                        this.remove()
+                    }
+
+                    this.element.style.left = `${this.x}px`;
+                    this.element.style.top = `${this.y}px`;
+                    this.element.style.fontSize = `${this.lifetime/60}vw`;
+                }
+
+            }
+
+            function generateNeonColorHSLA() {
+                const h = Math.floor(Math.random() * 360); // Random hue: 0–360°
+                const s = Math.floor(Math.random() * 21) + 80; // Saturation: 80–100%
+                const l = Math.floor(Math.random() * 21) + 50; // Lightness: 50–70%
+                const a = 1; // Alpha: fully opaque for neon effect
+                return `hsla(${h}, ${s}%, ${l}%, ${a})`;
+            }
+
+
+            
+
+            function createSymbols() {
+                for (let i = 0; i < 30; i++) {
+                    const symbol = new Symbol(symbols[Math.floor(Math.random() * symbols.length)]);
+                    symbolObjects.push(symbol);
+                }
+            }
+
+            function animateSymbols() {
+                symbolObjects.forEach(symbol => symbol.updatePosition());
+                requestAnimationFrame(animateSymbols);
+            }
+
+            // Create and animate symbols
+            createSymbols();
+            animateSymbols();
+        </script>
+
+        <style>
+            .theme-button {
+                font-size: small;
+            }
+        </style>
+    </body>
+</html>
