@@ -1,4 +1,4 @@
-This repository is used to quickly spin up my (web server)[https://edizucar.co.uk]. It consists of: 
+This repository is used to quickly spin up my [web server](https://edizucar.co.uk). It consists of: 
 
 * Static site
 * Library (calibre)
