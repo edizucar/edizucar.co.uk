@@ -4,6 +4,7 @@ This repository is used to quickly spin up my [web server](https://edizucar.co.u
 * Library (calibre)
 * Torrent client (deluge)
 * Monitoring (goaccess)
+* Media client (plex)
 
 To spin up:
 

@@ -21,7 +21,15 @@ calibre/books/*
 calibre/config/*
 calibre/books/*
 
+plex/config/*
+plex/media/*
+
+radarr/config/*
+sonarr/config/*
+
 goaccess/index.html
 
 nginx/logs/*
+
+.env
 
