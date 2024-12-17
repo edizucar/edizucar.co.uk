@@ -39,7 +39,6 @@ class Symbol {
     }
 
     onClick() {
-        console.log(Math.random());
         // create exprosion
         for (let i=0; i<10; i++) {
             const babySymbol = new BabySymbol(this.element.innerHTML, this.x+this.speedX, this.y+this.speedY, this.speedX, this.speedY);
@@ -120,7 +119,6 @@ function generateNeonColorHSLA() {
 
 
 function createSymbols() {
-    console.log("hello");
     for (let i = 0; i < 30; i++) {
         const symbol = new Symbol(symbols[Math.floor(Math.random() * symbols.length)]);
         symbolObjects.push(symbol);
@@ -129,7 +127,7 @@ function createSymbols() {
 
 function enough() {
     symbolObjects.forEach(symbol => {
-        if (Math.random() < 0.7) {
+        if (Math.random() < 0.1) {
             symbol.remove();
         } else {
             symbol.onClick();
@@ -138,10 +136,12 @@ function enough() {
 
 }
 
+
 function animateSymbols() {
-    if (symbolObjects.length > 300) {
-        enough();
-    }
+
     symbolObjects.forEach(symbol => symbol.updatePosition());
+    
     requestAnimationFrame(animateSymbols);
+
+    
 }
